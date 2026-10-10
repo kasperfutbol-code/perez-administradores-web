@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="robots" content="noindex,nofollow">
+  <meta name="referrer" content="no-referrer">
+  <meta name="theme-color" content="#173a36">
+  <title>Restablecer contraseña | Pérez Administradores</title>
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="assets/style.css">
+  <link rel="stylesheet" href="assets/admin.css">
+</head>
+<body class="dashboard-body" data-panel-page="recovery">
+  <div class="auth-layout">
+    <section class="auth-story" aria-label="Información del acceso">
+      <a class="brand auth-brand" href="index.html" aria-label="Pérez Administradores, volver al inicio">
+        <span class="brand-mark" aria-hidden="true">P</span>
+        <span class="brand-name"><strong>PÉREZ</strong><small>ADMINISTRADORES</small></span>
+      </a>
+      <div class="auth-story-content">
+        <p class="auth-eyebrow">ÁREA PRIVADA DEL DESPACHO</p>
+        <h1>Tu acceso, <em>protegido.</em></h1>
+        <p>Configura una nueva contraseña para continuar gestionando tus solicitudes.</p>
+        <div class="auth-story-foot">Acceso exclusivo para personal autorizado.</div>
+      </div>
+    </section>
+    <main class="auth-form-side">
+      <div class="auth-card">
+        <span class="auth-pill">RECUPERACIÓN DE ACCESO</span>
+        <h2>Nueva contraseña</h2>
+        <p id="recovery-intro" class="recovery-hint">Comprobando el enlace de recuperación…</p>
+        <div class="panel-alert panel-error" id="recovery-config-error" hidden>Falta configurar Supabase en <code>assets/supabase-config.js</code>.</div>
+        <form id="recovery-form" class="recovery-form" autocomplete="on" hidden>
+          <div class="field">
+            <label for="new-password">Nueva contraseña</label>
+            <input id="new-password" type="password" autocomplete="new-password" required minlength="12" maxlength="256" placeholder="Mínimo 12 caracteres">
+          </div>
+          <div class="field">
+            <label for="confirm-password">Repite la contraseña</label>
+            <input id="confirm-password" type="password" autocomplete="new-password" required minlength="12" maxlength="256">
+          </div>
+          <button class="btn panel-full-button" id="recovery-submit" type="submit">Guardar nueva contraseña →</button>
+        </form>
+        <p id="recovery-feedback" class="panel-feedback" role="status" aria-live="polite"></p>
+        <p class="auth-caption">Si el enlace ha caducado, solicita otro desde la página de acceso.</p>
+        <a href="login.html" class="panel-link">← Volver al acceso</a>
+      </div>
+    </main>
+  </div>
+  <script type="module" src="assets/recovery.js"></script>
+</body>
+</html>

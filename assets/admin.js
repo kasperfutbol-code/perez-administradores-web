@@ -47,6 +47,30 @@ async function initLogin() {
     return;
   }
 
+  // Solicitud de recuperación sin exponer si un correo está registrado.
+  $('#request-password-reset').addEventListener('click', async () => {
+    const emailInput = $('#login-email');
+    if (!emailInput.reportValidity()) {
+      setText('#reset-feedback', 'Introduce primero tu correo electrónico.');
+      emailInput.focus();
+      return;
+    }
+    const resetButton = $('#request-password-reset');
+    resetButton.disabled = true;
+    setText('#reset-feedback', 'Preparando el correo de recuperación…');
+    try {
+      const { error } = await client.auth.resetPasswordForEmail(emailInput.value.trim(), {
+        redirectTo: `${window.location.origin}/restablecer`,
+      });
+      if (error) throw error;
+      setText('#reset-feedback', 'Si el correo está registrado, recibirás un enlace para cambiar la contraseña. Comprueba también la carpeta de spam.');
+    } catch (error) {
+      setText('#reset-feedback', 'No se ha podido solicitar el cambio. Espera unos minutos y vuelve a intentarlo.');
+    } finally {
+      resetButton.disabled = false;
+    }
+  });
+
   $('#login-form').addEventListener('submit', async (event) => {
     event.preventDefault();
     const submit = $('#login-submit');

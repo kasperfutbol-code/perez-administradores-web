@@ -1,0 +1,27 @@
+PÉREZ ADMINISTRADORES — RECUPERACIÓN DE CONTRASEÑA
+
+ARCHIVOS DE ESTA ACTUALIZACIÓN:
+- login.html                 (SUSTITUYE al login anterior)
+- restablecer.html           (NUEVO)
+- assets/admin.js            (SUSTITUYE al anterior)
+- assets/admin.css           (SUSTITUYE al anterior)
+- assets/recovery.js         (NUEVO)
+
+MUY IMPORTANTE: NO se incluye assets/supabase-config.js, para que NO pierdas la URL ni la clave pública que ya configuraste.
+
+PASOS:
+1. En Supabase > Authentication > URL Configuration > Redirect URLs añade exactamente:
+   https://perez-administradores-web.vercel.app/restablecer
+   Conserva los destinos anteriores; no es necesario borrarlos.
+2. En GitHub (repo perez-administradores-web) sube el CONTENIDO de esta carpeta a la raíz. Mantén assets/ como carpeta.
+   Si GitHub no permite sustituir los ficheros existentes desde Upload files, edita los archivos existentes usando el editor de GitHub y copia el contenido de esta actualización.
+3. Después de que Vercel muestre Ready, abre:
+   https://perez-administradores-web.vercel.app/login
+4. Escribe el email del usuario existente y pulsa «¿Has olvidado tu contraseña?».
+5. Abre el ÚLTIMO correo recibido y pulsa su enlace UNA SOLA VEZ. Espera a que cargue /restablecer.
+6. Introduce una nueva contraseña de 12 o más caracteres y pulsa Guardar.
+7. Vuelve a /login e inicia sesión.
+
+No compartas contraseñas ni service_role/secret keys. La clave sb_publishable_ es pública.
+El panel de solicitudes es exclusivo para los usuarios inscritos en administradores y protegido mediante RLS.
+Si llegan correos pero redirigen a la portada en lugar de a restablecer, revisa Authentication > Email Templates > Reset Password: debe usar {{ .ConfirmationURL }}.
