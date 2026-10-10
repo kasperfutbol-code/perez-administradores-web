@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="robots" content="noindex,nofollow">
+  <meta name="theme-color" content="#173a36">
+  <title>Acceso al panel | Pérez Administradores</title>
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="assets/style.css">
+  <link rel="stylesheet" href="assets/admin.css">
+</head>
+<body class="dashboard-body" data-panel-page="login">
+  <div class="auth-layout">
+    <section class="auth-story" aria-label="Información del acceso">
+      <a class="brand auth-brand" href="index.html" aria-label="Pérez Administradores, volver al inicio">
+        <span class="brand-mark" aria-hidden="true">P</span>
+        <span class="brand-name"><strong>PÉREZ</strong><small>ADMINISTRADORES</small></span>
+      </a>
+      <div class="auth-story-content">
+        <p class="auth-eyebrow">ÁREA PRIVADA DEL DESPACHO</p>
+        <h1>La gestión, <em>bajo control.</em></h1>
+        <p>Consulta las solicitudes de presupuesto y organiza el seguimiento comercial desde un único lugar.</p>
+        <div class="auth-story-foot">Acceso exclusivo para personal autorizado.</div>
+      </div>
+    </section>
+    <main class="auth-form-side">
+      <div class="auth-card">
+        <span class="auth-pill">PANEL DE ADMINISTRACIÓN</span>
+        <h2>Bienvenido de nuevo</h2>
+        <p>Introduce tus credenciales para acceder al panel.</p>
+        <div class="panel-alert panel-error" id="auth-config-error" hidden>Falta configurar la conexión con Supabase en <code>assets/supabase-config.js</code>.</div>
+        <form id="login-form" autocomplete="on">
+          <div class="field">
+            <label for="login-email">Correo electrónico</label>
+            <input id="login-email" type="email" autocomplete="username" placeholder="tu@correo.com" required maxlength="254">
+          </div>
+          <div class="field">
+            <label for="login-password">Contraseña</label>
+            <input id="login-password" type="password" autocomplete="current-password" required>
+          </div>
+          <button class="btn panel-full-button" id="login-submit" type="submit">Entrar al panel →</button>
+          <p id="login-feedback" class="panel-feedback" role="status" aria-live="polite"></p>
+        </form>
+        <p class="auth-caption">Este acceso no es el despacho online de propietarios.</p>
+        <a href="index.html" class="panel-link">← Volver a la web</a>
+      </div>
+    </main>
+  </div>
+  <script type="module" src="assets/admin.js"></script>
+</body>
+</html>

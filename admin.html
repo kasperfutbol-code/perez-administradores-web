@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="robots" content="noindex,nofollow">
+  <meta name="theme-color" content="#173a36">
+  <title>Gestión de solicitudes | Pérez Administradores</title>
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="assets/style.css">
+  <link rel="stylesheet" href="assets/admin.css">
+</head>
+<body class="dashboard-body" data-panel-page="admin">
+  <div id="panel-loading" class="panel-loading" role="status">Comprobando el acceso seguro…</div>
+  <div id="panel-app" class="panel-app" hidden>
+    <aside class="panel-sidebar">
+      <a class="brand" href="index.html" aria-label="Pérez Administradores, inicio">
+        <span class="brand-mark" aria-hidden="true">P</span>
+        <span class="brand-name"><strong>PÉREZ</strong><small>ADMINISTRADORES</small></span>
+      </a>
+      <div class="sidebar-section-label">ESPACIO DE TRABAJO</div>
+      <div class="sidebar-active"><span aria-hidden="true">▦</span> Solicitudes</div>
+      <div class="sidebar-grow"></div>
+      <a class="sidebar-exit" href="index.html">↗ Visitar la web</a>
+      <button id="logout-button" type="button" class="sidebar-exit sidebar-logout">Cerrar sesión →</button>
+    </aside>
+    <main class="panel-content" id="contenido">
+      <header class="panel-top">
+        <div><p class="panel-kicker">PÉREZ ADMINISTRADORES / GESTIÓN</p><h1>Solicitudes</h1></div>
+        <div class="panel-user"><span class="panel-user-dot" aria-hidden="true">P</span><span id="current-user">Administración</span></div>
+      </header>
+      <p class="panel-intro">Organiza las solicitudes recibidas y consulta su estado en un solo lugar.</p>
+      <div id="panel-error" class="panel-alert panel-error" role="alert" hidden></div>
+      <section class="panel-counters" aria-label="Resumen de solicitudes">
+        <article class="counter-card"><span>Total recibidas</span><strong id="stat-total">0</strong><small>Solicitudes registradas</small></article>
+        <article class="counter-card"><span>Pendientes</span><strong id="stat-pendientes">0</strong><small>Por contactar</small></article>
+        <article class="counter-card"><span>En seguimiento</span><strong id="stat-seguimiento">0</strong><small>Contactadas y enviadas</small></article>
+        <article class="counter-card"><span>Aceptadas</span><strong id="stat-aceptadas">0</strong><small>Presupuestos aceptados</small></article>
+      </section>
+      <section class="panel-section" aria-label="Listado de solicitudes">
+        <div class="panel-section-header"><div><h2>Listado de solicitudes</h2><p id="list-description">Cargando solicitudes…</p></div><button class="panel-secondary-button" id="refresh-button" type="button">↻ Actualizar</button></div>
+        <div class="panel-filters">
+          <label class="panel-search"><span class="sr-only">Buscar solicitudes</span><input type="search" id="search-input" placeholder="Buscar por nombre, comunidad o correo"></label>
+          <label class="sr-only" for="state-filter">Filtrar por estado</label>
+          <select id="state-filter"><option value="todos">Todos los estados</option><option value="pendiente">Pendiente</option><option value="contactada">Contactada</option><option value="presupuesto_enviado">Presupuesto enviado</option><option value="aceptada">Aceptada</option><option value="rechazada">Rechazada</option></select>
+        </div>
+        <div class="panel-table-scroll"><table class="panel-table"><thead><tr><th>Fecha</th><th>Contacto</th><th>Comunidad</th><th>Servicio</th><th>Estado</th><th></th></tr></thead><tbody id="solicitudes-rows"><tr><td colspan="6">Cargando…</td></tr></tbody></table></div>
+        <p class="table-footer-note" id="table-count"></p>
+      </section>
+      <section class="detail-panel" id="request-detail" hidden aria-labelledby="detail-title">
+        <div class="detail-heading"><div><p class="panel-kicker">FICHA DE SOLICITUD</p><h2 id="detail-title">Detalle</h2></div><button type="button" class="panel-close" id="close-detail" aria-label="Cerrar ficha">✕</button></div>
+        <dl class="detail-data">
+          <div><dt>Correo</dt><dd><a id="detail-email" href="#">—</a></dd></div>
+          <div><dt>Teléfono</dt><dd id="detail-phone">—</dd></div>
+          <div><dt>Comunidad</dt><dd id="detail-community">—</dd></div>
+          <div><dt>Viviendas</dt><dd id="detail-homes">—</dd></div>
+          <div><dt>Servicio</dt><dd id="detail-service">—</dd></div>
+          <div><dt>Fecha</dt><dd id="detail-date">—</dd></div>
+        </dl>
+        <div class="detail-message"><strong>Mensaje de la solicitud</strong><p id="detail-message">—</p></div>
+        <div class="detail-fields">
+          <div class="field"><label for="detail-status">Estado</label><select id="detail-status"><option value="pendiente">Pendiente</option><option value="contactada">Contactada</option><option value="presupuesto_enviado">Presupuesto enviado</option><option value="aceptada">Aceptada</option><option value="rechazada">Rechazada</option></select></div>
+          <div class="field"><label for="detail-notes">Notas internas</label><textarea id="detail-notes" maxlength="6000" placeholder="Añade notas de seguimiento…"></textarea></div>
+        </div>
+        <div class="detail-actions"><button class="btn" type="button" id="save-detail">Guardar cambios</button><span class="panel-feedback" id="save-feedback" role="status" aria-live="polite"></span></div>
+      </section>
+    </main>
+  </div>
+  <script type="module" src="assets/admin.js"></script>
+</body>
+</html>
