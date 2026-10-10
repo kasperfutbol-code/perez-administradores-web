@@ -1,0 +1,66 @@
+PÉREZ ADMINISTRADORES — CONEXIÓN SEGURA DE FORMULARIOS CON SUPABASE
+
+SITUACIÓN: El panel privado ya funciona. Este paquete actualiza ÚNICAMENTE
+los formularios públicos. No modifica login.html, admin.html ni supabase-config.js.
+
+CONTENIDO:
+  presupuesto.html  (sustituir)
+  contacto.html     (sustituir)
+  privacidad.html   (sustituir; revisar datos legales antes de producción)
+  assets/formularios.js           (añadir)
+  assets/formularios-config.js    (añadir, editar sitekey)
+  api/solicitudes.js              (añadir nueva carpeta api en raíz)
+
+IMPORTANTE: Si aún no configuras Cloudflare Turnstile, las páginas seguirán
+abriendo un CORREO preparado, sin guardar nada en Supabase. No se pierden formularios.
+Para activar el guardado necesitas completar TODOS los pasos siguientes.
+
+PASO 1 — CLOUDFLARE TURNSTILE
+  1. Ve a https://dash.cloudflare.com/ > Turnstile.
+  2. Crea un widget para el dominio perez-administradores-web.vercel.app.
+     Configura después también perezadministradores.com si se usa como dominio final.
+  3. Copia la SITE KEY pública y la SECRET KEY privada.
+  4. Edita assets/formularios-config.js y sustituye PEGA_AQUI_TU_SITEKEY_PUBLICA
+     por la SITE KEY pública, conservando las comillas.
+  5. NO pongas la SECRET KEY en ningún archivo de GitHub.
+
+PASO 2 — VARIABLES PRIVADAS EN VERCEL
+  En Vercel: proyecto Pérez Administradores > Settings > Environment Variables.
+  Crea las tres variables en el entorno Production (y Preview solo si procede):
+    SUPABASE_URL           = URL completa de tu proyecto Supabase
+    SUPABASE_SECRET_KEY    = clave secret sb_secret_... (nunca la pública)
+    TURNSTILE_SECRET_KEY   = clave secreta de Cloudflare Turnstile
+  NO compartas esas claves por chat y NO las subas a GitHub.
+  Guarda y despliega de nuevo (un commit nuevo o redeploy).
+
+PASO 3 — GITHUB
+  Descomprime este ZIP. En GitHub, sube los 3 .html a la raíz,
+  los archivos de assets/ dentro de la carpeta assets/ existente y el archivo
+  api/solicitudes.js dentro de la carpeta api/ en la raíz.
+  Si GitHub no permite arrastrar carpetas, crea la ruta con Add file > Create new
+  file y nombra el archivo api/solicitudes.js; pega su contenido completo.
+  Sobrescribe los archivos de mismo nombre, NO borres los demás.
+  Pulsa Commit changes. Vercel desplegará automáticamente.
+
+PASO 4 — PRUEBA
+  En Vercel comprueba que el deployment diga Ready.
+  Abre /presupuesto y envía una solicitud con datos ficticios claramente marcados
+  como PRUEBA. En el panel /admin pulsa Actualizar.
+  Debe aparecer la solicitud con estado Pendiente.
+  Comprueba también /contacto.
+
+SI SALE UN ERROR:
+  - Se abre correo en vez de enviar: falta la SITE KEY en formularios-config.js.
+  - Error 503: faltan variables de Vercel o falla comunicación externa.
+  - Error 400 de verificación: revisa dominios autorizados en Turnstile.
+  - Error 502: revisa la clave sb_secret_ y el nombre de tabla solicitudes.
+
+PRIVACIDAD:
+  Antes de usar con clientes reales, revisa privacidad.html con el responsable
+  de protección de datos: responsable, base jurídica, finalidad, conservación,
+  encargados y transferencias, derechos, tratamiento Turnstile y Supabase.
+  Considera límites de solicitudes (WAF / rate limiting), registros de auditoría
+  y alertas por email. Turnstile reduce spam pero no sustituye los límites.
+
+El acceso al panel conserva la RLS para administradores. La clave SECRET de
+Supabase queda exclusivamente en las variables de Vercel (lado servidor).
